@@ -32,7 +32,6 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-          cache: pip
       - run: pip install pyinstaller
       - run: pyinstaller --clean --onefile --name arp-poisoning-detector arp_poisoning_detector.py
       - run: choco install innosetup --no-progress -y
@@ -61,7 +60,6 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-          cache: pip
       - run: pip install pyinstaller
       - run: pyinstaller --clean --onefile --name arp-poisoning-detector arp_poisoning_detector.py
       - name: Build pkg
@@ -83,7 +81,6 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-          cache: pip
       - run: pip install pyinstaller
       - run: pyinstaller --clean --onefile --name arp-poisoning-detector arp_poisoning_detector.py
       - name: Build deb and rpm
