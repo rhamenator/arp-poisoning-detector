@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
       - run: python -m py_compile arp_poisoning_detector.py
       - name: Parser smoke test
-        run: python -c "from arp_poisoning_detector import parse_arp_table; assert parse_arp_table('192.0.2.1 aa:bb:cc:dd:ee:ff dynamic')"
+        run: python -c "from arp_poisoning_detector import parse_arp_table; assert parse_arp_table('192.0.2.1 aa-bb-cc-dd-ee-ff dynamic')"
 
   windows:
     needs: test
