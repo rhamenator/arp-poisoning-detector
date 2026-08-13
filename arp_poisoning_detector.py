@@ -9,18 +9,18 @@ def get_arp_table():
 
 def parse_arp_table(arp_output):
     # Regular expression to match IP and MAC addresses
-    arp_regex = re.compile(r'(\d+\.\d+\.\d+\.\d+)\s+([\w-]+)\s+([\w:]+)')
+    arp_regex = re.compile(r'(\d+\.\d+\.\d+\.\d+)\s+([0-9A-Fa-f:-]+)\s+(\w+)')
     arp_entries = arp_regex.findall(arp_output)
     return arp_entries
 
 def check_for_arp_poisoning(arp_entries):
     ip_mac_map = {}
-    arp_posioning_detected = False
-    for ip, mac, type in arp_entries:
-        network_id = type
+    arp_poisoning_detected = False
+    for ip, mac, entry_type in arp_entries:
+        network_id = entry_type
         interface_ip = ip
         mac_regex = re.compile(r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$')
-        if not type.startswith('Ox'):
+        if not entry_type.startswith('Ox'):
             # This line in arp_entries is not an interface
             network_id = None
             interface_ip = None
@@ -33,10 +33,12 @@ def check_for_arp_poisoning(arp_entries):
                 print(f"Warning: Potential ARP poisoning detected for IP {ip}!")
                 print(f"MAC addresses: {ip_mac_map[ip]} and {mac}")
                 print(f"Interface IP: {interface_ip} Network ID: {network_id}")
-                arp_posioning_detected = True
+                arp_poisoning_detected = True
         else:
             ip_mac_map[ip] = mac
-    if not arp_posioning_detected: print("Info: ARP poisoning not detected.")
+    if not arp_poisoning_detected:
+        print("Info: ARP poisoning not detected.")
+    return arp_poisoning_detected
     
 if __name__ == "__main__":
     arp_output = get_arp_table()
