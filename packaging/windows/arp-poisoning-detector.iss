@@ -4,6 +4,8 @@
 #endif
 
 [Setup]
+UninstallDisplayIcon={app}\app-icon.ico
+SetupIconFile=app-icon.ico
 AppId={{C712561C-0DBE-4B67-8146-9F7FC77281F1}
 AppName={#AppName}
 AppVersion={#AppVersion}
@@ -18,10 +20,11 @@ ArchitecturesInstallIn64BitMode=x64compatible
 ChangesEnvironment=yes
 
 [Files]
+Source: "app-icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\dist\arp-poisoning-detector.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\ARP Poisoning Detector"; Filename: "{app}\arp-poisoning-detector.exe"
+Name: "{group}\ARP Poisoning Detector"; Filename: "{app}\arp-poisoning-detector.exe"; IconFilename: "{app}\app-icon.ico"
 
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Check: NeedsPathUpdate

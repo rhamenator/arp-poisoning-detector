@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/logo.png" alt="ARP Poisoning Detector logo" width="220">
+</p>
+
 # ARP Poisoning Detector
 
 This is a simple command-line program that runs the `arp -a` command and checks for potential ARP poisoning by looking for duplicate IP addresses with different MAC addresses.
